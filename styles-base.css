@@ -1,0 +1,174 @@
+/* FRAC Font Family */
+@font-face {
+    font-family: 'FRAC';
+    src: url('assets/fonts/FRAC-Thin.woff2') format('woff2'),
+         url('assets/fonts/FRAC-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FRAC';
+    src: url('assets/fonts/FRAC-Light.woff2') format('woff2'),
+         url('assets/fonts/FRAC-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FRAC';
+    src: url('assets/fonts/FRAC-Regular.woff2') format('woff2'),
+         url('assets/fonts/FRAC-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FRAC';
+    src: url('assets/fonts/FRAC-Medium.woff2') format('woff2'),
+         url('assets/fonts/FRAC-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FRAC';
+    src: url('assets/fonts/FRAC-Bold.woff2') format('woff2'),
+         url('assets/fonts/FRAC-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FRAC';
+    src: url('assets/fonts/FRAC-ExtraBold.woff2') format('woff2'),
+         url('assets/fonts/FRAC-ExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* CSS Variables - Brand Colors */
+:root {
+    --color-dark-green: #004639;
+    --color-lime: #9CFF4A;
+    --color-gold: #F4AF23;
+    --color-purple: #6638B6;
+    --color-pale-yellow: #fff59e;
+    --color-gray: #737373;
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+
+    --font-display: 'FRAC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+/* Reset */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--color-black);
+    background-color: var(--color-white);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Version Navigation */
+.version-nav {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0.75rem 1.25rem;
+    border-radius: 100px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(10px);
+}
+
+.version-nav a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.875rem;
+    background: var(--color-white);
+    border: 2px solid var(--color-dark-green);
+    color: var(--color-dark-green);
+    transition: all 0.2s ease;
+}
+
+.version-nav a:hover {
+    background: var(--color-dark-green);
+    color: var(--color-white);
+}
+
+.version-nav a.active {
+    background: var(--color-dark-green);
+    color: var(--color-white);
+}
+
+/* Partner Logos */
+.partners-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem 3rem;
+}
+
+.partners-grid a {
+    display: block;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+}
+
+.partners-grid a:hover {
+    opacity: 1;
+}
+
+.partners-grid img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+@media (min-width: 768px) {
+    .partners-grid img {
+        height: 50px;
+    }
+}
