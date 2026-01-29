@@ -7,7 +7,12 @@
     <meta name="description" content="MUNICH Beyond brings together festivals, venues and cultural institutions from Munich and Bavaria with artists, creators and producers from around the world.">
     <link rel="stylesheet" href="styles-base.css">
     <style>
-        /* VERSION 7: Digital Glitch - Subtle glitch effects, scan lines, digital aesthetic */
+        /* VERSION 11: Based on Version 7 - Refined with Magenta, larger logo, orange accents */
+
+        :root {
+            --color-magenta: #E91E8C;
+            --color-orange: #F4AF23;
+        }
 
         .page-wrapper {
             min-height: 100vh;
@@ -49,34 +54,27 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
 
-        /* Header */
+        /* Header - smaller logo at top */
         header {
             position: relative;
             z-index: 10;
-            padding: 2rem;
+            padding: 1.5rem 2rem;
             display: flex;
             justify-content: center;
         }
 
-        .logo {
-            max-width: 260px;
+        .logo-small {
+            max-width: 160px;
             filter: brightness(0) invert(1);
-            animation: glitchLogo 8s ease-in-out infinite;
-        }
-
-        @keyframes glitchLogo {
-            0%, 90%, 100% { filter: brightness(0) invert(1); transform: translate(0); }
-            91% { filter: brightness(0) invert(1) hue-rotate(90deg); transform: translate(-2px, 0); }
-            92% { filter: brightness(0) invert(1); transform: translate(2px, 0); }
-            93% { filter: brightness(0) invert(1) hue-rotate(-90deg); transform: translate(0); }
+            opacity: 0.6;
         }
 
         @media (min-width: 768px) {
             header {
-                padding: 2.5rem 4rem;
+                padding: 2rem 4rem;
             }
-            .logo {
-                max-width: 320px;
+            .logo-small {
+                max-width: 180px;
             }
         }
 
@@ -84,13 +82,78 @@
         .hero {
             position: relative;
             z-index: 10;
-            min-height: 90vh;
+            min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 2rem;
+        }
+
+        /* Large Logo with Magenta and Glitch Effect */
+        .logo-main {
+            max-width: 500px;
+            width: 90%;
+            margin-bottom: 2.5rem;
+            position: relative;
+            filter: brightness(0) saturate(100%);
+        }
+
+        .logo-main img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Magenta color filter for logo */
+        .logo-main::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-magenta);
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+
+        .logo-main {
+            animation: glitchLogoMain 6s ease-in-out infinite;
+        }
+
+        @keyframes glitchLogoMain {
+            0%, 92%, 100% {
+                transform: translate(0);
+                filter: brightness(0) saturate(100%);
+            }
+            93% {
+                transform: translate(-3px, 0);
+                filter: brightness(0) saturate(100%) hue-rotate(30deg);
+            }
+            94% {
+                transform: translate(3px, 0);
+                filter: brightness(0) saturate(100%);
+            }
+            95% {
+                transform: translate(-2px, 1px);
+                filter: brightness(0) saturate(100%) hue-rotate(-30deg);
+            }
+            96% {
+                transform: translate(0);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .logo-main {
+                max-width: 600px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .logo-main {
+                max-width: 700px;
+            }
         }
 
         .hero-tagline {
@@ -100,7 +163,7 @@
             text-transform: uppercase;
             letter-spacing: 0.4em;
             color: var(--color-lime);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             position: relative;
         }
 
@@ -115,13 +178,14 @@
             51%, 100% { opacity: 0; }
         }
 
+        /* Headline - smaller, below logo */
         .hero-headline {
             font-family: var(--font-display);
             font-weight: 800;
-            font-size: clamp(2.5rem, 10vw, 6rem);
-            line-height: 0.95;
-            margin-bottom: 3rem;
-            letter-spacing: -0.03em;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            line-height: 1;
+            margin-bottom: 2.5rem;
+            letter-spacing: -0.02em;
             position: relative;
         }
 
@@ -141,12 +205,12 @@
         }
 
         .hero-headline .line::before {
-            color: var(--color-lime);
+            color: var(--color-magenta);
             animation: glitchText1 4s ease-in-out infinite;
         }
 
         .hero-headline .line::after {
-            color: var(--color-gold);
+            color: var(--color-orange);
             animation: glitchText2 4s ease-in-out infinite;
         }
 
@@ -176,31 +240,10 @@
         .hero-meta .date {
             font-family: var(--font-display);
             font-weight: 700;
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             color: var(--color-white);
             margin-bottom: 0.5rem;
             display: block;
-        }
-
-        /* Data stream decoration */
-        .data-stream {
-            position: absolute;
-            left: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-family: monospace;
-            font-size: 0.625rem;
-            color: rgba(156, 255, 74, 0.3);
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            letter-spacing: 0.5em;
-            display: none;
-        }
-
-        @media (min-width: 1024px) {
-            .data-stream {
-                display: block;
-            }
         }
 
         /* Hero Image */
@@ -263,9 +306,9 @@
         .section-marker {
             font-family: monospace;
             font-size: 0.625rem;
-            color: var(--color-lime);
+            color: var(--color-magenta);
             margin-bottom: 1rem;
-            opacity: 0.6;
+            opacity: 0.8;
         }
 
         .section-title {
@@ -291,7 +334,7 @@
             display: grid;
             gap: 1px;
             margin-top: 2rem;
-            background: rgba(156, 255, 74, 0.2);
+            background: rgba(233, 30, 140, 0.3);
         }
 
         @media (min-width: 640px) {
@@ -310,7 +353,7 @@
             font-size: 0.625rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: var(--color-lime);
+            color: var(--color-magenta);
             margin-bottom: 0.75rem;
         }
 
@@ -334,7 +377,7 @@
         .audience-list li {
             font-size: 0.9375rem;
             padding: 1rem 0 1rem 2rem;
-            border-left: 1px solid rgba(156, 255, 74, 0.3);
+            border-left: 1px solid rgba(233, 30, 140, 0.4);
             color: rgba(255,255,255,0.8);
             position: relative;
             transition: all 0.3s ease;
@@ -344,7 +387,7 @@
             content: '>';
             position: absolute;
             left: 0.75rem;
-            color: var(--color-lime);
+            color: var(--color-magenta);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -354,31 +397,8 @@
         }
 
         .audience-list li:hover {
-            color: var(--color-lime);
-            border-left-color: var(--color-lime);
-        }
-
-        /* Updates */
-        .updates-section {
-            border-top: 1px solid rgba(156, 255, 74, 0.2);
-            border-bottom: 1px solid rgba(156, 255, 74, 0.2);
-            background: rgba(156, 255, 74, 0.02);
-        }
-
-        .update-item {
-            font-family: monospace;
-        }
-
-        .update-date {
-            font-size: 0.75rem;
-            color: var(--color-lime);
-            margin-bottom: 0.75rem;
-        }
-
-        .update-text {
-            font-size: 0.9375rem;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.8);
+            color: var(--color-magenta);
+            border-left-color: var(--color-magenta);
         }
 
         /* When Where */
@@ -389,6 +409,14 @@
             padding: 6rem 2rem;
         }
 
+        /* Small logo above date */
+        .when-where-logo {
+            max-width: 200px;
+            margin: 0 auto 2rem;
+            filter: brightness(0) invert(1);
+            opacity: 0.5;
+        }
+
         .when-where-date {
             font-family: var(--font-display);
             font-weight: 800;
@@ -397,26 +425,26 @@
             margin-bottom: 1rem;
             color: var(--color-white);
             text-shadow:
-                2px 2px 0 var(--color-lime),
-                -2px -2px 0 var(--color-gold);
+                2px 2px 0 var(--color-magenta),
+                -2px -2px 0 var(--color-orange);
             animation: glitchDate 6s ease-in-out infinite;
         }
 
         @keyframes glitchDate {
             0%, 95%, 100% {
                 text-shadow:
-                    2px 2px 0 var(--color-lime),
-                    -2px -2px 0 var(--color-gold);
+                    2px 2px 0 var(--color-magenta),
+                    -2px -2px 0 var(--color-orange);
             }
             96% {
                 text-shadow:
-                    -4px 2px 0 var(--color-lime),
-                    4px -2px 0 var(--color-gold);
+                    -4px 2px 0 var(--color-magenta),
+                    4px -2px 0 var(--color-orange);
             }
             97% {
                 text-shadow:
-                    4px -2px 0 var(--color-lime),
-                    -4px 2px 0 var(--color-gold);
+                    4px -2px 0 var(--color-magenta),
+                    -4px 2px 0 var(--color-orange);
             }
         }
 
@@ -436,10 +464,10 @@
 
         .partners-label {
             font-family: monospace;
-            font-size: 0.625rem;
+            font-size: 0.6875rem;
             text-transform: uppercase;
             letter-spacing: 0.2em;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255,255,255,0.5);
             text-align: center;
             margin-bottom: 2.5rem;
         }
@@ -452,15 +480,38 @@
             content: ' ]';
         }
 
+        .powered-by {
+            font-family: monospace;
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(255,255,255,0.4);
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Orange filter for partner logos */
+        .partners-grid {
+            gap: 2.5rem 3.5rem;
+        }
+
         .partners-grid img {
-            filter: brightness(0) invert(1);
-            opacity: 0.5;
+            height: 55px;
+            filter: brightness(0) saturate(100%) invert(76%) sepia(55%) saturate(500%) hue-rotate(360deg) brightness(100%) contrast(95%);
+            opacity: 0.85;
             transition: all 0.3s ease;
         }
 
         .partners-grid a:hover img {
             opacity: 1;
-            filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(156, 255, 74, 0.5));
+            filter: brightness(0) saturate(100%) invert(76%) sepia(55%) saturate(500%) hue-rotate(360deg) brightness(110%) contrast(100%);
+        }
+
+        @media (min-width: 768px) {
+            .partners-grid img {
+                height: 60px;
+            }
         }
 
         /* Footer */
@@ -469,7 +520,7 @@
             z-index: 10;
             background: rgba(0,0,0,0.8);
             padding: 3rem 2rem;
-            border-top: 1px solid rgba(156, 255, 74, 0.2);
+            border-top: 1px solid rgba(233, 30, 140, 0.3);
         }
 
         .footer-content {
@@ -481,18 +532,32 @@
         .footer-links {
             margin-bottom: 2rem;
             font-family: monospace;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem 2rem;
+        }
+
+        .footer-links .link-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links .link-label {
+            font-size: 0.6875rem;
+            color: rgba(255,255,255,0.4);
+            text-transform: lowercase;
         }
 
         .footer-links a {
-            display: inline-block;
-            margin: 0 1rem 0.5rem;
             font-size: 0.8125rem;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.6);
             transition: color 0.3s ease;
         }
 
         .footer-links a:hover {
-            color: var(--color-lime);
+            color: var(--color-magenta);
         }
 
         .footer-legal {
@@ -520,26 +585,31 @@
         /* Version Nav */
         .version-nav {
             background: rgba(5, 5, 8, 0.95);
-            border: 1px solid rgba(156, 255, 74, 0.3);
+            border: 1px solid rgba(233, 30, 140, 0.4);
         }
 
         .version-nav a {
             background: transparent;
-            border-color: rgba(156, 255, 74, 0.3);
-            color: rgba(156, 255, 74, 0.7);
+            border-color: rgba(233, 30, 140, 0.4);
+            color: rgba(233, 30, 140, 0.8);
             font-family: monospace;
         }
 
         .version-nav a:hover {
-            background: var(--color-lime);
-            border-color: var(--color-lime);
+            background: var(--color-magenta);
+            border-color: var(--color-magenta);
             color: #050508;
         }
 
         .version-nav a.active {
-            background: var(--color-lime);
-            border-color: var(--color-lime);
+            background: var(--color-magenta);
+            border-color: var(--color-magenta);
             color: #050508;
+        }
+
+        /* Hidden updates section */
+        .updates-section {
+            display: none;
         }
     </style>
 </head>
@@ -548,15 +618,20 @@
         <div class="scanlines"></div>
         <div class="noise"></div>
 
-        <!-- Header -->
+        <!-- Header with small logo -->
         <header>
-            <img src="assets/images/Logo.png" alt="MUNICH Beyond" class="logo">
+            <img src="assets/images/Logo.png" alt="MUNICH Beyond" class="logo-small">
         </header>
 
         <!-- Hero -->
         <section class="hero">
-            <div class="data-stream">01001101 01010101 01001110 01001001 01000011 01001000</div>
             <p class="hero-tagline">Festival for Immersive Storytelling + Virtual Production</p>
+
+            <!-- Large Logo with Magenta color -->
+            <div class="logo-main">
+                <img src="assets/images/Logo.png" alt="MUNICH Beyond">
+            </div>
+
             <h1 class="hero-headline">
                 <span class="line" data-text="New stages.">New <span class="highlight">stages.</span></span>
                 <span class="line" data-text="New formats.">New <span class="highlight">formats.</span></span>
@@ -629,7 +704,7 @@
             </ul>
         </section>
 
-        <!-- Updates -->
+        <!-- Updates - Hidden by default -->
         <section class="content-section updates-section">
             <p class="section-marker">// 005_UPDATES</p>
             <h2 class="section-title">Updates</h2>
@@ -641,6 +716,7 @@
 
         <!-- When & Where -->
         <section class="when-where">
+            <img src="assets/images/Logo.png" alt="MUNICH Beyond" class="when-where-logo">
             <p class="when-where-date">July 1–5<br>2026</p>
             <p class="when-where-location">Munich · Bavaria · The Future</p>
         </section>
@@ -655,9 +731,6 @@
                 <a href="https://1e9.community" target="_blank" rel="noopener">
                     <img src="assets/images/1E9_Logo.png" alt="1E9">
                 </a>
-                <a href="https://www.fff-bayern.de/" target="_blank" rel="noopener">
-                    <img src="assets/images/FFF-Logo-kompakt-FFF-Bayern-Verlauf-positiv-600px.png" alt="FilmFernsehFonds Bayern">
-                </a>
                 <a href="https://www.residenztheater.de/" target="_blank" rel="noopener">
                     <img src="assets/images/RESI_Residenztheater_Logo_RZ_RGB_sw.png" alt="Residenztheater München">
                 </a>
@@ -668,14 +741,26 @@
                     <img src="assets/images/filmfest-muenchen_logo_rz.png" alt="FILMFEST MÜNCHEN">
                 </a>
             </div>
+            <p class="powered-by">powered by</p>
+            <div class="partners-grid" style="justify-content: center;">
+                <a href="https://www.fff-bayern.de/" target="_blank" rel="noopener">
+                    <img src="assets/images/FFF-Logo-kompakt-FFF-Bayern-Verlauf-positiv-600px.png" alt="FilmFernsehFonds Bayern">
+                </a>
+            </div>
         </section>
 
         <!-- Footer -->
         <footer>
             <div class="footer-content">
                 <div class="footer-links">
-                    <a href="https://munich-beyond.com">munich-beyond.com</a>
-                    <a href="mailto:alexandra@1e9.community">alexandra@1e9.community</a>
+                    <span class="link-item">
+                        <span class="link-label">updates:</span>
+                        <a href="https://munich-beyond.com">munich-beyond.com</a>
+                    </span>
+                    <span class="link-item">
+                        <span class="link-label">contact:</span>
+                        <a href="mailto:alexandra@1e9.community">alexandra@1e9.community</a>
+                    </span>
                 </div>
                 <details class="footer-legal">
                     <summary>Impressum & Legal</summary>
@@ -694,11 +779,11 @@
             <a href="version4.html">4</a>
             <a href="version5.html">5</a>
             <a href="version6.html">6</a>
-            <a href="version7.html" class="active">7</a>
+            <a href="version7.html">7</a>
             <a href="version8.html">8</a>
             <a href="version9.html">9</a>
             <a href="version10.html">10</a>
-            <a href="version11.html">11</a>
+            <a href="version11.html" class="active">11</a>
         </nav>
     </div>
 </body>
