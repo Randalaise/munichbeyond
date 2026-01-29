@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUNICH Beyond – Festival for Immersive Storytelling + Virtual Production</title>
+    <meta name="description" content="MUNICH Beyond brings together festivals, venues and cultural institutions from Munich and Bavaria with artists, creators and producers from around the world.">
+    <link rel="stylesheet" href="styles-base.css">
+    <style>
+        /* VERSION 9: Morphing Shapes - Abstract organic shapes, smooth morphing, artistic */
+
+        .page-wrapper {
+            min-height: 100vh;
+            background: #f8f8f6;
+            color: var(--color-black);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* SVG Morphing shapes background */
+        .morph-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        .morph-shape {
+            position: absolute;
+            animation: morphMove 30s ease-in-out infinite;
+        }
+
+        .morph-shape svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .morph-shape-1 {
+            width: 500px;
+            height: 500px;
+            top: -10%;
+            right: -10%;
+        }
+
+        .morph-shape-1 svg path {
+            fill: var(--color-dark-green);
+            opacity: 0.08;
+            animation: morphPath1 20s ease-in-out infinite;
+        }
+
+        .morph-shape-2 {
+            width: 400px;
+            height: 400px;
+            bottom: 10%;
+            left: -5%;
+            animation-delay: -10s;
+        }
+
+        .morph-shape-2 svg path {
+            fill: var(--color-lime);
+            opacity: 0.1;
+            animation: morphPath2 25s ease-in-out infinite;
+        }
+
+        .morph-shape-3 {
+            width: 300px;
+            height: 300px;
+            top: 40%;
+            right: 5%;
+            animation-delay: -5s;
+        }
+
+        .morph-shape-3 svg path {
+            fill: var(--color-gold);
+            opacity: 0.08;
+            animation: morphPath3 22s ease-in-out infinite;
+        }
+
+        @keyframes morphMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -20px) rotate(5deg); }
+            66% { transform: translate(-20px, 30px) rotate(-5deg); }
+        }
+
+        @keyframes morphPath1 {
+            0%, 100% { d: path('M200,50 Q350,100 300,200 Q250,300 150,280 Q50,260 80,150 Q110,40 200,50'); }
+            50% { d: path('M180,60 Q320,80 320,180 Q320,280 180,300 Q40,320 50,180 Q60,40 180,60'); }
+        }
+
+        @keyframes morphPath2 {
+            0%, 100% { d: path('M150,30 Q280,50 260,150 Q240,250 130,260 Q20,270 40,140 Q60,10 150,30'); }
+            50% { d: path('M160,50 Q300,100 270,200 Q240,300 100,270 Q-40,240 30,120 Q100,0 160,50'); }
+        }
+
+        @keyframes morphPath3 {
+            0%, 100% { d: path('M100,20 Q180,30 170,100 Q160,170 90,175 Q20,180 25,100 Q30,20 100,20'); }
+            50% { d: path('M110,30 Q200,60 180,130 Q160,200 70,190 Q-20,180 10,90 Q40,0 110,30'); }
+        }
+
+        /* Header */
+        header {
+            position: relative;
+            z-index: 10;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo {
+            max-width: 280px;
+            transition: transform 0.5s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        @media (min-width: 768px) {
+            header {
+                padding: 3rem 4rem;
+            }
+            .logo {
+                max-width: 340px;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            z-index: 10;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-tagline {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--color-dark-green);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards 0.3s;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-headline {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1;
+            margin-bottom: 3rem;
+            letter-spacing: -0.02em;
+            color: var(--color-black);
+        }
+
+        .hero-headline .line {
+            display: block;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .hero-headline .line:nth-child(1) { animation-delay: 0.5s; }
+        .hero-headline .line:nth-child(2) { animation-delay: 0.7s; }
+        .hero-headline .line:nth-child(3) { animation-delay: 0.9s; }
+
+        .hero-headline .highlight {
+            color: var(--color-dark-green);
+            position: relative;
+        }
+
+        .hero-headline .highlight::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0.1em;
+            width: 100%;
+            height: 0.15em;
+            background: var(--color-lime);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: underline 0.6s ease forwards 1.5s;
+        }
+
+        @keyframes underline {
+            to { transform: scaleX(1); }
+        }
+
+        .hero-meta {
+            opacity: 0;
+            animation: fadeUp 1s ease forwards 1.2s;
+        }
+
+        .hero-meta .date {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.375rem;
+            color: var(--color-black);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-meta .location {
+            font-size: 1rem;
+            color: var(--color-gray);
+        }
+
+        /* Hero Image */
+        .hero-image-wrapper {
+            position: relative;
+            z-index: 10;
+            padding: 0 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .hero-image-wrapper {
+                padding: 0 4rem;
+            }
+        }
+
+        .hero-image {
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0, 70, 57, 0.15);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.02);
+        }
+
+        .hero-image figcaption {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            font-size: 0.6875rem;
+            color: rgba(255,255,255,0.7);
+            background: rgba(0,0,0,0.4);
+            padding: 0.375rem 0.75rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Content Sections */
+        .content-section {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .content-section {
+                padding: 6rem 2rem;
+            }
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            margin-bottom: 1.5rem;
+            color: var(--color-black);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--color-lime);
+            border-radius: 50%;
+        }
+
+        .section-text {
+            font-size: 1.125rem;
+            line-height: 1.85;
+            color: var(--color-gray);
+        }
+
+        .section-text + .section-text {
+            margin-top: 1.25rem;
+        }
+
+        /* Expect Grid */
+        .expect-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .expect-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .expect-item {
+            padding: 2rem;
+            background: var(--color-white);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 70, 57, 0.06);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .expect-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--color-lime);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .expect-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 70, 57, 0.1);
+        }
+
+        .expect-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .expect-label {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-dark-green);
+            margin-bottom: 0.75rem;
+        }
+
+        .expect-value {
+            font-size: 0.9375rem;
+            color: var(--color-black);
+            line-height: 1.6;
+        }
+
+        /* Audience List */
+        .audience-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .audience-list li {
+            font-size: 1.0625rem;
+            padding: 1.25rem 0 1.25rem 2rem;
+            color: var(--color-black);
+            border-bottom: 1px solid #eee;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .audience-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid var(--color-lime);
+            background: transparent;
+            transition: background 0.3s ease;
+        }
+
+        .audience-list li:hover::before {
+            background: var(--color-lime);
+        }
+
+        .audience-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Updates */
+        .updates-section {
+            background: linear-gradient(135deg, rgba(156, 255, 74, 0.1), rgba(244, 175, 35, 0.05));
+            border-radius: 24px;
+            margin: 0 1rem;
+            max-width: calc(800px - 2rem);
+        }
+
+        @media (min-width: 768px) {
+            .updates-section {
+                margin: 0 auto;
+            }
+        }
+
+        .update-item {
+            background: var(--color-white);
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--color-dark-green);
+        }
+
+        .update-date {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: var(--color-dark-green);
+            margin-bottom: 0.75rem;
+        }
+
+        .update-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--color-black);
+        }
+
+        /* When Where */
+        .when-where {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 6rem 2rem;
+            background: var(--color-dark-green);
+            color: var(--color-white);
+            margin: 4rem 0;
+            overflow: hidden;
+        }
+
+        .when-where::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: var(--color-lime);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.2); opacity: 0.15; }
+        }
+
+        .when-where-date {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .when-where-location {
+            font-size: 1.125rem;
+            opacity: 0.8;
+        }
+
+        /* Partners */
+        .partners-section {
+            position: relative;
+            z-index: 10;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .partners-label {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-gray);
+            margin-bottom: 2.5rem;
+        }
+
+        .partners-grid img {
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .partners-grid a:hover img {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 10;
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            display: inline-block;
+            margin: 0 1rem 0.5rem;
+            font-size: 0.9375rem;
+            color: rgba(255,255,255,0.6);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-lime);
+        }
+
+        .footer-legal {
+            font-size: 0.6875rem;
+            color: rgba(255,255,255,0.4);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: left;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .footer-legal summary {
+            cursor: pointer;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .footer-legal p {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        /* Version Nav */
+        .version-nav a.active {
+            background: var(--color-dark-green);
+            border-color: var(--color-dark-green);
+        }
+
+        .version-nav a:hover {
+            background: var(--color-dark-green);
+            border-color: var(--color-dark-green);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Morphing shapes background -->
+        <div class="morph-bg">
+            <div class="morph-shape morph-shape-1">
+                <svg viewBox="0 0 400 400">
+                    <path d="M200,50 Q350,100 300,200 Q250,300 150,280 Q50,260 80,150 Q110,40 200,50"/>
+                </svg>
+            </div>
+            <div class="morph-shape morph-shape-2">
+                <svg viewBox="0 0 300 300">
+                    <path d="M150,30 Q280,50 260,150 Q240,250 130,260 Q20,270 40,140 Q60,10 150,30"/>
+                </svg>
+            </div>
+            <div class="morph-shape morph-shape-3">
+                <svg viewBox="0 0 200 200">
+                    <path d="M100,20 Q180,30 170,100 Q160,170 90,175 Q20,180 25,100 Q30,20 100,20"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header>
+            <img src="assets/images/Logo.png" alt="MUNICH Beyond" class="logo">
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <p class="hero-tagline">Festival for Immersive Storytelling + Virtual Production</p>
+            <h1 class="hero-headline">
+                <span class="line">New <span class="highlight">stages.</span></span>
+                <span class="line">New <span class="highlight">formats.</span></span>
+                <span class="line">New <span class="highlight">audiences.</span></span>
+            </h1>
+            <div class="hero-meta">
+                <p class="date">July 1–5, 2026</p>
+                <p class="location">Munich · Bavaria · The Future</p>
+            </div>
+        </section>
+
+        <!-- Hero Image -->
+        <div class="hero-image-wrapper">
+            <figure class="hero-image">
+                <img src="assets/images/hero.jpg" alt="MUNICH Beyond 2025 Festival Impression">
+                <figcaption>© 1E9</figcaption>
+            </figure>
+        </div>
+
+        <!-- What is Munich Beyond -->
+        <section class="content-section">
+            <h2 class="section-title">What is MUNICH Beyond?</h2>
+            <p class="section-text">MUNICH Beyond brings together festivals, venues and cultural institutions from Munich and Bavaria with artists, creators and producers from around the world to explore the future of immersive arts.</p>
+            <p class="section-text">Expect XR works, showcases, talks and encounters — where artistic practice meets real-time media and new audiences.</p>
+        </section>
+
+        <!-- What to Expect -->
+        <section class="content-section">
+            <h2 class="section-title">What to Expect</h2>
+            <p class="section-text">A curated program at the intersection of immersive arts and production cultures.</p>
+            <div class="expect-grid">
+                <div class="expect-item">
+                    <p class="expect-label">Format</p>
+                    <p class="expect-value">XR · Immersive Storytelling · Spatial Media · Virtual Production</p>
+                </div>
+                <div class="expect-item">
+                    <p class="expect-label">Mode</p>
+                    <p class="expect-value">Showcases · Talks · Labs · Encounters</p>
+                </div>
+                <div class="expect-item">
+                    <p class="expect-label">Focus</p>
+                    <p class="expect-value">Formats · Audiences · Venues · Business Models</p>
+                </div>
+                <div class="expect-item">
+                    <p class="expect-label">Region</p>
+                    <p class="expect-value">Munich · Bavaria · Europe</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- A Short Look Back -->
+        <section class="content-section">
+            <h2 class="section-title">A Short Look Back</h2>
+            <p class="section-text">MUNICH Beyond took place for the first time in 2025, bringing together immersive works, professional exchange and an international community.</p>
+            <p class="section-text">The 2026 edition builds on this first edition with an expanded program and new international partnerships.</p>
+        </section>
+
+        <!-- Who Is It For -->
+        <section class="content-section">
+            <h2 class="section-title">Who Is It For?</h2>
+            <ul class="audience-list">
+                <li>Artists & Creators</li>
+                <li>Producers & Industry Professionals</li>
+                <li>Cultural Institutions & Festivals</li>
+                <li>Curious audiences interested in immersive media</li>
+            </ul>
+        </section>
+
+        <!-- Updates -->
+        <section class="content-section updates-section">
+            <h2 class="section-title">Updates</h2>
+            <div class="update-item">
+                <p class="update-date">+++ Feb 21, 2026 +++</p>
+                <p class="update-text">We are happy to announce The Netherlands as our partner country this year. Stay tuned for immersive experiences from Amsterdam, Utrecht and Rotterdam.</p>
+            </div>
+        </section>
+
+        <!-- When & Where -->
+        <section class="when-where">
+            <p class="when-where-date">July 1–5, 2026</p>
+            <p class="when-where-location">Munich · Bavaria · The Future</p>
+        </section>
+
+        <!-- Partners -->
+        <section class="partners-section">
+            <p class="partners-label">A collaboration by</p>
+            <div class="partners-grid">
+                <a href="https://www.1e9.community/festival-der-zukunft/2026/deutsch" target="_blank" rel="noopener">
+                    <img src="assets/images/FdZ_Logo_Globe_grau_edited.png" alt="Festival der Zukunft">
+                </a>
+                <a href="https://1e9.community" target="_blank" rel="noopener">
+                    <img src="assets/images/1E9_Logo.png" alt="1E9">
+                </a>
+                <a href="https://www.fff-bayern.de/" target="_blank" rel="noopener">
+                    <img src="assets/images/FFF-Logo-kompakt-FFF-Bayern-Verlauf-positiv-600px.png" alt="FilmFernsehFonds Bayern">
+                </a>
+                <a href="https://www.residenztheater.de/" target="_blank" rel="noopener">
+                    <img src="assets/images/RESI_Residenztheater_Logo_RZ_RGB_sw.png" alt="Residenztheater München">
+                </a>
+                <a href="https://xrhub-bavaria.de/" target="_blank" rel="noopener">
+                    <img src="assets/images/xr_hub.png" alt="XR HUB Bavaria">
+                </a>
+                <a href="https://www.filmfest-muenchen.de/" target="_blank" rel="noopener">
+                    <img src="assets/images/filmfest-muenchen_logo_rz.png" alt="FILMFEST MÜNCHEN">
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="https://munich-beyond.com">munich-beyond.com</a>
+                    <a href="mailto:alexandra@1e9.community">alexandra@1e9.community</a>
+                </div>
+                <details class="footer-legal">
+                    <summary>Impressum & Legal</summary>
+                    <p>MUNICH Beyond ist ein Angebot der 1E9 Denkfabrik GmbH · Spitzwegstraße 4, 81373 München · HRB 247847, Amtsgericht München</p>
+                    <p>Geschäftsführer: Wolfgang Kerler (verantwortlich i.S.v. §55 RStV), Krischan Lehmann</p>
+                    <p>Kontakt: hallo@1e9.community · Redaktion: 1E9 Denkfabrik GmbH, Forum der Zukunft, Museumsinsel 1, 80538 München · USt-IdNr.: DE323458493</p>
+                </details>
+            </div>
+        </footer>
+
+        <!-- Version Navigation -->
+        <nav class="version-nav">
+            <a href="version1.html">1</a>
+            <a href="version2.html">2</a>
+            <a href="version3.html">3</a>
+            <a href="version4.html">4</a>
+            <a href="version5.html">5</a>
+            <a href="version6.html">6</a>
+            <a href="version7.html">7</a>
+            <a href="version8.html">8</a>
+            <a href="version9.html" class="active">9</a>
+            <a href="version10.html">10</a>
+        </nav>
+    </div>
+</body>
+</html>
