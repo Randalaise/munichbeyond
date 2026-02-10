@@ -67,29 +67,23 @@
         header {
             position: relative;
             z-index: 10;
-            padding: 2rem;
+            padding: 4rem 2rem 0;
             display: flex;
             justify-content: center;
         }
 
         .logo {
-            max-width: 260px;
-            animation: glitchLogo 8s ease-in-out infinite;
-        }
-
-        @keyframes glitchLogo {
-            0%, 90%, 100% { transform: translate(0); }
-            91% { transform: translate(-2px, 0); }
-            92% { transform: translate(2px, 0); }
-            93% { transform: translate(0); }
+            max-width: 90%;
+            width: 800px;
         }
 
         @media (min-width: 768px) {
             header {
-                padding: 2.5rem 4rem;
+                padding: 5rem 4rem 0;
             }
             .logo {
-                max-width: 600px;
+                width: 1000px;
+                max-width: 85%;
             }
         }
 
@@ -97,45 +91,40 @@
         .hero {
             position: relative;
             z-index: 10;
-            min-height: 90vh;
+            min-height: auto;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             text-align: center;
-            padding: 2rem;
+            padding: 3rem 2rem 4rem;
         }
 
         .hero-tagline {
             font-family: var(--font-display);
             font-weight: 500;
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 0.4em;
+            letter-spacing: 0.3em;
             color: var(--color-lime);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             position: relative;
+            order: 2;
         }
 
         .hero-tagline::before {
-            content: '>';
-            margin-right: 0.5rem;
-            animation: blink 1s step-end infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
+            content: none;
         }
 
         .hero-headline {
             font-family: var(--font-display);
             font-weight: 800;
-            font-size: clamp(2.5rem, 10vw, 6rem);
-            line-height: 0.95;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            line-height: 1.1;
             margin-bottom: 3rem;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.02em;
             position: relative;
+            order: 1;
         }
 
         .hero-headline .line {
@@ -143,47 +132,15 @@
             position: relative;
         }
 
-        .hero-headline .line::before,
-        .hero-headline .line::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            opacity: 0;
-        }
-
-        .hero-headline .line::before {
-            color: var(--color-lime);
-            animation: glitchText1 4s ease-in-out infinite;
-        }
-
-        .hero-headline .line::after {
-            color: var(--color-gold);
-            animation: glitchText2 4s ease-in-out infinite;
-        }
-
-        @keyframes glitchText1 {
-            0%, 94%, 100% { opacity: 0; transform: translate(0); }
-            95% { opacity: 0.8; transform: translate(-3px, -1px); }
-            96% { opacity: 0; transform: translate(3px, 1px); }
-        }
-
-        @keyframes glitchText2 {
-            0%, 94%, 100% { opacity: 0; transform: translate(0); }
-            95% { opacity: 0.8; transform: translate(3px, 1px); }
-            96% { opacity: 0; transform: translate(-3px, -1px); }
-        }
-
         .hero-headline .highlight {
             color: var(--color-lime);
-            text-shadow: 0 0 20px rgba(156, 255, 74, 0.3);
         }
 
         .hero-meta {
             font-family: monospace;
             font-size: 0.875rem;
             color: rgba(255,255,255,0.6);
+            order: 3;
         }
 
         .hero-meta .date {
@@ -193,6 +150,18 @@
             color: var(--color-white);
             margin-bottom: 0.5rem;
             display: block;
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                padding: 3rem 4rem 5rem;
+            }
+            .hero-headline {
+                font-size: clamp(2rem, 4vw, 3rem);
+            }
+            .hero-tagline {
+                font-size: 0.75rem;
+            }
         }
 
         /* Hero Image */
@@ -567,12 +536,12 @@
 
         <!-- Hero -->
         <section class="hero">
-            <p class="hero-tagline">Festival for Immersive Storytelling + Virtual Production</p>
             <h1 class="hero-headline">
-                <span class="line" data-text="New stages.">New <span class="highlight">stages.</span></span>
-                <span class="line" data-text="New formats.">New <span class="highlight">formats.</span></span>
-                <span class="line" data-text="New audiences.">New <span class="highlight">audiences.</span></span>
+                <span class="line">New <span class="highlight">stages.</span></span>
+                <span class="line">New <span class="highlight">formats.</span></span>
+                <span class="line">New <span class="highlight">audiences.</span></span>
             </h1>
+            <p class="hero-tagline">Festival for Immersive Storytelling + Virtual Production</p>
             <div class="hero-meta">
                 <span class="date">July 1–5, 2026</span>
                 Munich · Bavaria · The Future
