@@ -331,19 +331,21 @@
         }
 
         .when-where-logo {
-            max-width: 400px;
+            max-width: 90%;
+            width: 400px;
             margin: 0 auto 1.5rem;
         }
 
         @media (min-width: 768px) {
             .when-where-logo {
-                max-width: 600px;
+                width: 600px;
+                max-width: 85%;
             }
         }
 
         .when-where-location {
             font-family: monospace;
-            font-size: 0.875rem;
+            font-size: clamp(0.75rem, 2.5vw, 0.875rem);
             color: rgba(255,255,255,0.8);
             margin-bottom: 1.5rem;
         }
@@ -351,7 +353,7 @@
         .when-where-date {
             font-family: var(--font-display);
             font-weight: 800;
-            font-size: clamp(1rem, 4vw, 1.5rem);
+            font-size: clamp(0.875rem, 3vw, 1.5rem);
             line-height: 1;
             color: var(--color-white);
             text-transform: uppercase;
